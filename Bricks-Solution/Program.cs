@@ -180,7 +180,7 @@ class Brick
             errors = 0;
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Enter row #" + i + ", separated with space");
+                Console.WriteLine("Enter row #" + ((1+i)-00) + ", separated with space");
                 string fullRow = Console.ReadLine();
                 // We separate the elements with space 
                 string[] arrRow = fullRow.Split(' ');
