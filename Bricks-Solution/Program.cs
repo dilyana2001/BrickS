@@ -1,4 +1,4 @@
-using System;
+
 class Brick
 {   // We create our brick object with class Brick
     // indicate variables integers m(colums) and n(rows)
@@ -31,7 +31,7 @@ class Brick
                     //Conditions for arranging the bricks in the new layer
                     if (i != n - 1 && second[i + 1, j] == 0 && first[i, j] != first[i + 1, j])
                     {
-                        if ((j == m - 2 && first[i, j + 1] == first[i + 1, j + 1]) || (j < m - 2 && second[i, j + 2] != 0 && second[i, j] != second[i, j + 1]))
+                        if ((j == m - 2 && first[i, j + 1] == first[i + 1, j + 1]) || (j < m - 2 && second[i, j + 1] == 0 && second[i, j + 2] != 0 && first[i, j] != first[i, j + 1]))
                         {
                             second[i, j + 1] = brick;
                             brick++;
@@ -123,7 +123,7 @@ class Brick
             errors = 0;
             Console.WriteLine("\nEnter even numbers for row and column, separated with space");
             string numRowsColumns = Console.ReadLine();
-            // We separate the elements with space
+            // We separate the elements with space 
             string[] arrRowsColumns = numRowsColumns.Split(' ');
             if (arrRowsColumns.Length != 2)
             {
@@ -223,7 +223,7 @@ class Brick
 
             if (errors == 1)
             {
-                Console.WriteLine("Wrong layer! Please, enter the numbers again");
+                Console.WriteLine("Wrong layer! Please, enter layer again");
             }
         } while (errors == 1);
 
