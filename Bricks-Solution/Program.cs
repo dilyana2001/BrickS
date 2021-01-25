@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 class Brick
 {   // We create our brick object with class Brick
     // indicate variables integers m(colums) and n(rows)
@@ -123,6 +123,7 @@ class Brick
             errors = 0;
             Console.WriteLine("\nEnter even numbers for row and column, separated with space");
             string numRowsColumns = Console.ReadLine();
+            // We separate the elements with space
             string[] arrRowsColumns = numRowsColumns.Split(' ');
             if (arrRowsColumns.Length != 2)
             {
@@ -169,16 +170,64 @@ class Brick
                 }
             }
         } while (errors == 1);
+
+
         int[,] first = new int[n, m];
-        Console.WriteLine("\nEnter First layer bricks:");
-        for (int i = 0; i < n; i++)
+        int bricksNum = (n * m) / 2;
+        errors = 1;
+        do
         {
-            for (int j = 0; j < m; j++)
+            errors = 0;
+            for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Row " + i + " and column " + j + ": ");
-                first[i, j] = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Enter row #" + i + ", separated with space");
+                string fullRow = Console.ReadLine();
+                // We separate the elements with space 
+                string[] arrRow = fullRow.Split(' ');
+                if (arrRow.Length != m)
+                {
+                    errors = 1;
+                }
+                else
+                {
+                    for (int j = 0; j < m; j++)
+                    {
+                        try
+                        {
+                            int numHalfBrick = Int32.Parse(arrRow[j]);
+                            if (numHalfBrick <= bricksNum)
+                            {
+                                //Conditions for arranging the bricks to not place on more than 2 spaces on row
+                                if ((j > 1 && first[i, j - 1] == numHalfBrick && first[i, j - 2] == numHalfBrick) ||
+                                    (i > 1 && first[i - 1, j] == numHalfBrick && first[i - 2, j] == numHalfBrick))
+                                {
+                                    errors = 1;
+                                }
+                                else
+                                {
+                                    first[i, j] = numHalfBrick;
+                                }
+                            }
+                            else
+                            {
+                                errors = 1;
+                            }
+                        }
+                        catch (FormatException)
+                        {
+                            errors = 1;
+                        }
+                    }
+                }
             }
-        }
+
+            if (errors == 1)
+            {
+                Console.WriteLine("Wrong layer! Please, enter the numbers again");
+            }
+        } while (errors == 1);
+
+
         Console.WriteLine("\nFirst Layer Bricks:");
         for (int i = 0; i < n; i++)
         {
