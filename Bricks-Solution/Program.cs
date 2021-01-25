@@ -1,4 +1,4 @@
-
+using System;
 class Brick
 {   // We create our brick object with class Brick
     // indicate variables integers m(colums) and n(rows)
@@ -31,7 +31,8 @@ class Brick
                     //Conditions for arranging the bricks in the new layer
                     if (i != n - 1 && second[i + 1, j] == 0 && first[i, j] != first[i + 1, j])
                     {
-                        if ((j == m - 2 && first[i, j + 1] == first[i + 1, j + 1]) || (j < m - 2 && second[i, j + 1] == 0 && second[i, j + 2] != 0 && first[i, j] != first[i, j + 1]))
+
+                        if ((j == m - 2 && first[i, j + 1] == first[i + 1, j + 1]) || (i % 2 != 0 && second[i - 1, j] == second[i - 1, j + 1]) || (j % 2 == 0 && j < m - 1 && first[i, j + 1] == first[i + 1, j + 1]))
                         {
                             second[i, j + 1] = brick;
                             brick++;
@@ -180,7 +181,7 @@ class Brick
             errors = 0;
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine("Enter row #" + ((1+i)-00) + ", separated with space");
+                Console.WriteLine("Enter row #" + ((1 + i) - 00) + ", separated with space");
                 string fullRow = Console.ReadLine();
                 // We separate the elements with space 
                 string[] arrRow = fullRow.Split(' ');
